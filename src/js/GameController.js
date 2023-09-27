@@ -4,23 +4,21 @@ export default class GameController {
   }
 
   getCell() {
-    while (true) {
-      let randomCell = Math.floor(Math.random() * (this.gamePlay.boardSize ** 2));
-      if (!(this.gamePlay.activeCell === randomCell)) {
-        return randomCell;
-      }
-    }
+    return Math.floor(
+      Math.random() * (this.gamePlay.boardSize * this.gamePlay.boardSize)
+    );
   }
 
   init() {
     this.gamePlay.drawUi();
 
     const newsInterval = setInterval(() => {
-      const newCell = this.getCell();
+      let newCell = this.getCell();
+      while (newCell === this.gamePlay.activeCell) {
+        newCell = this.getCell();
+      }
       this.gamePlay.redrawPositions(newCell);
       this.gamePlay.activeCell = newCell;
     }, 1000);
-
   }
-
 }

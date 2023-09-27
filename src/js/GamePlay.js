@@ -8,7 +8,7 @@ export default class GamePlay {
 
   bindToDOM(container) {
     if (!(container instanceof HTMLElement)) {
-      throw new Error('container is not HTMLElement');
+      throw new Error("container is not HTMLElement");
     }
     this.container = container;
   }
@@ -16,30 +16,29 @@ export default class GamePlay {
   drawUi() {
     this.checkBinding();
 
-    this.boardEl = this.container.querySelector('[data-id=board]');
+    this.boardEl = this.container.querySelector("[data-id=board]");
 
-    for (let i = 0; i < this.boardSize ** 2; i += 1) {
-      const cellEl = document.createElement('div');
-      cellEl.classList.add('cell');
+    for (let i = 0; i < this.boardSize * this.boardSize; i += 1) {
+      const cellEl = document.createElement("div");
+      cellEl.classList.add("cell");
       this.boardEl.appendChild(cellEl);
     }
-
   }
 
   redrawPositions(newCell) {
     if (this.activeCell !== null) {
-      this.boardEl.children[this.activeCell].innerHTML = '';
+      this.boardEl.children[this.activeCell].innerHTML = "";
     }
     const cellEl = this.boardEl.children[newCell];
-    const charEl = document.createElement('div');
-    charEl.classList.add('goblin');
+    const charEl = document.createElement("div");
+    charEl.classList.add("goblin");
 
     cellEl.appendChild(charEl);
   }
 
   checkBinding() {
     if (this.container === null) {
-      throw new Error('GamePlay not bind to DOM');
+      throw new Error("GamePlay not bind to DOM");
     }
   }
 }
